@@ -1,0 +1,25 @@
+# Dependencias do LightWireless.
+#
+#     python -m pip install -r requirements.txt
+#
+# Para gerar o .exe: + pyinstaller (python ferramentas\empacotar.py).
+
+# Desenha a marca, os icones e os botoes arredondados.
+# Sem ela a janela abre, mas sem icone nenhum.
+pillow>=10.0
+
+# Fala com a lampada na rede local. E a unica biblioteca que implementa o
+# protocolo Tuya 3.5, que e o desta lampada.
+tinytuya>=1.20
+
+# Icone na bandeja do sistema. Opcional de verdade: sem ela o programa abre e
+# funciona, so nao tem icone ao lado do relogio -- e o "esconder" vira um
+# minimizar comum, para a janela nao sumir sem ter como voltar.
+pystray>=0.19
+
+# Login na conta Tuya por User Code + QR (so para pegar a chave uma vez).
+# O SDK importa `cryptography` sem declarar: ela vai aqui explicita.
+tuya-device-sharing-sdk>=0.2.15
+cryptography>=42
+# Desenha o QR do login (sem dependencias).
+segno>=1.6

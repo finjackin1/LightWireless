@@ -1,0 +1,63 @@
+# LightWireless
+
+# SEGREDO -- nunca versionar.
+# O config.json guarda a localKey da lampada e o devices.json, alem dela,
+# guarda tudo que o wizard do tinytuya baixou da conta.
+config.json
+devices.json
+snapshot.json
+tuya-raw.json
+tinytuya.json
+# copia de seguranca que o programa faz antes de gravar uma chave nova
+config.json.bak
+
+# E A COPIA DE SEGURANCA DELES TAMBEM. As linhas acima NAO cobriam
+# `config.json.guardado` nem `devices.json.guardado`, que estao nesta pasta
+# com a chave da lampada dentro -- o git casa nome exato, e `config.json` nao
+# casa `config.json.guardado`. Qualquer despejo de sonda (da nuvem ou da
+# varredura da rede) carrega a chave, entao a regra e a extensao inteira.
+*.guardado
+
+# GERADOS EM TEMPO DE EXECUCAO -- carregam o caminho desta maquina e o nome
+# de usuario do Windows. O programa recria os dois quando precisa deles.
+# A pasta INTEIRA nao entra aqui: ha script escrito a mao dentro dela.
+ferramentas/criar-tarefa-inicio.bat
+ferramentas/remover-tarefa-inicio.bat
+
+# O icone do executavel e DESENHADO na hora de empacotar (icones.marca), numa
+# pasta temporaria. Versionar o .ico criaria duas marcas livres para divergir.
+*.ico
+config.json.tmp
+
+# Saida de teste: muda a cada execucao e nao diz nada sobre o codigo.
+relatorios/
+
+# Minhas anotacoes de contexto, escritas para o Claude e nao para quem le o
+# repositorio.
+docs/CONTEXTO.md
+docs/PARADA.md
+docs/contexto/
+docs/historico/
+.claude/
+CLAUDE.md
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Empacotamento (o build trabalha em pasta temporaria; so dist\ fica)
+build/
+dist/
+*.spec
+*.zip
+uso-cct-teste.txt
+
+# Editor e sistema
+.vscode/
+.idea/
+*.bak
+Thumbs.db
+desktop.ini

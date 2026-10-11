@@ -1,0 +1,80 @@
+LightWireless -- avisos de terceiros
+====================================
+
+O LightWireless e distribuido sob a GPLv3 (ver LICENSE). Este arquivo lista
+o software de terceiros que ele usa e sob que licenca.
+
+
+BIBLIOTECAS PYTHON
+------------------
+
+tinytuya
+    Comunicacao com a lampada na rede local (protocolo Tuya 3.5).
+    Licenca: MIT
+    https://github.com/jasonacox/tinytuya
+
+Pillow (PIL Fork)
+    Desenho da marca, dos glifos da barra de titulo e das pastilhas de
+    temperatura.
+    Licenca: MIT-CMU (HPND)
+    https://github.com/python-pillow/Pillow
+
+pystray
+    Icone na bandeja do sistema. Dependencia opcional -- o programa abre e
+    funciona sem ela.
+    Licenca: LGPLv3
+    https://github.com/moses-palmer/pystray
+
+tuya-device-sharing-sdk (tuya_sharing)
+    Login na conta Tuya por User Code + QR, usado so para pegar uma vez a
+    chave local da lampada. Mantido pela Tuya.
+    Licenca: MIT (Copyright Tuya)
+    https://github.com/tuya/tuya-device-sharing-sdk
+    Usa o registro publico do Home Assistant na Tuya (client_id
+    HA_3y9q4ak7g4ephrvke, schema haauthorize). A Tuya o chama de provisorio:
+    se deixar de funcionar, "Colar a chave" continua disponivel.
+
+paho-mqtt
+    Dependencia do SDK acima (o LightWireless nao liga o MQTT).
+    Licenca: dupla EPL-2.0 OU EDL-1.0 (BSD-3-Clause); usada aqui sob a EDL-1.0.
+    https://github.com/eclipse-paho/paho.mqtt.python
+
+cryptography
+    AES-GCM do protocolo 3.5 (via tinytuya) e das chamadas do SDK da Tuya.
+    Licenca: dupla Apache-2.0 OU BSD-3-Clause
+    https://github.com/pyca/cryptography
+
+segno
+    Desenha o QR do login (sem dependencias).
+    Licenca: BSD-3-Clause (Copyright Lars Heuer)
+    https://github.com/heuer/segno
+
+
+O QUE NAO E DEPENDENCIA
+-----------------------
+
+Os atalhos globais NAO usam biblioteca de teclado. O registro da combinacao
+e feito pela API oficial do Windows (`RegisterHotKey`), chamada por `ctypes`,
+que faz parte da biblioteca padrao do Python. Nenhum gancho de teclado e
+instalado e o programa nao ve o que e digitado fora das combinacoes que ele
+mesmo registrou.
+
+O mesmo vale para os cantos arredondados da janela, o inicio com o Windows
+(Agendador de Tarefas) e a leitura de qual programa esta em primeiro plano:
+tudo pela API do proprio Windows, via `ctypes`.
+
+
+COMPATIBILIDADE COM A GPLv3
+---------------------------
+
+Nada aqui bloqueia a GPLv3:
+
+    MIT, MIT-CMU (HPND), BSD-3-Clause, EDL-1.0 e Apache-2.0 sao permissivas
+    e podem ser combinadas com codigo GPLv3 (Apache-2.0 e compativel com a
+    GPLv3; licencas conferidas na fonte em 11/out/2026).
+
+    A LGPLv3 e explicitamente compativel com a GPLv3: um programa GPLv3 pode
+    usar uma biblioteca LGPLv3.
+
+Se alguma dessas licencas mudar numa versao futura da biblioteca, este
+arquivo precisa ser conferido de novo antes de publicar.
