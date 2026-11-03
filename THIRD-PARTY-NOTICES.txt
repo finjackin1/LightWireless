@@ -64,6 +64,21 @@ O mesmo vale para os cantos arredondados da janela, o início com o Windows
 tudo pela API do próprio Windows, via `ctypes`.
 
 
+EXECUTÁVEL
+----------
+
+Python
+    O .exe leva junto o interpretador Python.
+    Licença: Python Software Foundation License
+    https://docs.python.org/3/license.html
+
+PyInstaller
+    Gera o .exe. O carregador que vai dentro dele tem a exceção da licença
+    do PyInstaller, que permite distribuir o programa sob qualquer licença.
+    Licença: GPLv2 com exceção para o carregador
+    https://github.com/pyinstaller/pyinstaller
+
+
 COMPATIBILIDADE COM A GPLv3
 ---------------------------
 
