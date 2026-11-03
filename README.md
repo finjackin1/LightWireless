@@ -5,7 +5,7 @@ Uma janela pequena de tamanho fixo, um clique para acender, seis temperaturas
 de branco, timer, agenda por horário e atalhos de teclado que funcionam com o
 programa em segundo plano.
 
-Fala com a lâmpada **direto na rede local** — sem nuvem e sem depender da
+Fala com a lâmpada direto na rede local, sem nuvem e sem depender da
 internet. A conta do app Tuya Smart só é usada uma vez, para obter a chave
 do aparelho.
 
@@ -35,8 +35,8 @@ do aparelho.
 
 ## O que ele não faz (ainda)
 
-Brilho, cores RGB, cenas, sincronia com a tela ou com música. A versão 1 é
-liga/desliga e temperatura de branco, de propósito.
+Brilho, cores RGB, cenas, sincronia com a tela ou com música. Por enquanto ele
+faz liga/desliga e temperatura de branco, de propósito.
 
 ---
 
@@ -50,8 +50,8 @@ liga/desliga e temperatura de branco, de propósito.
 ### A chave
 
 Cada lâmpada Tuya tem uma chave que autoriza conversar com ela na rede local.
-Ela **não** viaja pela rede: só existe na nuvem do fabricante, e vem de lá
-uma vez. Não há caminho local — para aparelho Wi-Fi Tuya, não existe.
+Ela não viaja pela rede: só existe na nuvem do fabricante e vem de lá
+uma vez. Para aparelho Wi-Fi Tuya não existe outro jeito de pegá-la.
 
 **Jeito mais fácil: "Entrar com conta Tuya"** (a lâmpada cadastrada no app
 **Tuya Smart** ou **Smart Life**; sem conta de desenvolvedor, sem senha):
@@ -64,7 +64,7 @@ uma vez. Não há caminho local — para aparelho Wi-Fi Tuya, não existe.
 
 O programa lê a lista de aparelhos da conta, acha qual deles é a lâmpada da
 sua rede, grava o id e a chave e conecta. Senha, login (tokens) e User Code
-**não** são guardados; a sessão é encerrada logo em seguida.
+não são guardados; a sessão é encerrada logo em seguida.
 
 > Esse login usa o mesmo caminho oficial da Tuya que o Home Assistant usa
 > (biblioteca `tuya-device-sharing-sdk` e o registro público do Home
@@ -76,7 +76,7 @@ direto; **"Usar o devices.json"** lê o arquivo do assistente do tinytuya; e
 **"Portal de desenvolvedor"** busca com o Access ID/Secret de um projeto em
 iot.tuya.com (o acesso gratuito de lá expira e precisa ser renovado).
 
-Depois disso o programa **não fala mais com nuvem nenhuma**: só com a lâmpada,
+Depois disso o programa não fala mais com nuvem nenhuma, só com a lâmpada,
 dentro da sua rede.
 
 > **Resetou a lâmpada ou trocou de Wi-Fi?** O reset gera uma chave nova:
@@ -87,26 +87,22 @@ dentro da sua rede.
 
 ## Instalação a partir do código-fonte
 
-Requer **Python 3.11 ou mais novo** no Windows.
+Requer Python 3.11 ou mais novo no Windows.
 
 1. Baixe ou clone este repositório.
-2. Obtenha a chave da sua lâmpada com o assistente do tinytuya:
-
-   ```
-   python -m pip install tinytuya
-   python -m tinytuya wizard
-   ```
-
-   Ele pede uma conta gratuita de desenvolvedor Tuya e gera um `devices.json`.
-3. Copie esse `devices.json` para a pasta do LightWireless. Na primeira
-   execução o programa converte o que precisa para o `config.json` dele e você
-   pode apagar o original.
-4. Instale as dependências e abra:
+2. Instale as dependências e abra:
 
    ```
    python -m pip install -r requirements.txt
    pythonw LightWireless.pyw
    ```
+
+3. Pegue a chave em **Configurar**, como na versão pronta.
+
+Se você já tem um `devices.json` do assistente do tinytuya
+(`python -m tinytuya wizard`), copie para a pasta do LightWireless antes de
+abrir. Na primeira execução o programa converte o que precisa para o
+`config.json` dele e você pode apagar o original.
 
 ### Dependências
 
@@ -114,19 +110,18 @@ Requer **Python 3.11 ou mais novo** no Windows.
 |---|---|---|
 | [tinytuya](https://github.com/jasonacox/tinytuya) | Falar com a lâmpada. É a única que implementa o protocolo Tuya 3.5, que é o desta lâmpada | MIT |
 | [Pillow](https://python-pillow.org/) | Desenhar a marca, os ícones e os botões | MIT-CMU |
-| [pystray](https://github.com/moses-palmer/pystray) | Ícone na bandeja. Opcional de verdade: sem ela o programa abre e funciona | LGPLv3 |
+| [pystray](https://github.com/moses-palmer/pystray) | Ícone na bandeja. Opcional: sem ela o programa abre e funciona | LGPLv3 |
 | [tuya-device-sharing-sdk](https://github.com/tuya/tuya-device-sharing-sdk) | "Entrar com conta Tuya" (User Code + QR), só para pegar a chave | MIT |
 | [cryptography](https://github.com/pyca/cryptography) | AES-GCM (o SDK acima usa sem declarar) | Apache-2.0 / BSD |
 | [segno](https://github.com/heuer/segno) | Desenhar o QR do login | BSD-3-Clause |
 
-Os atalhos globais **não** usam biblioteca de teclado. Quem compara a
-combinação é o próprio Windows, pelo mecanismo oficial de atalho — o programa
-não vê nada do que você digita, não instala gancho de teclado e não é barrado
-por antivírus.
+Os atalhos globais não usam biblioteca de teclado. Quem compara a
+combinação é o próprio Windows, pelo mecanismo oficial de atalho. O programa
+não vê nada do que você digita e não instala gancho de teclado.
 
 ---
 
-## Compilando do código-fonte
+## Como gerar o .exe
 
 O executável distribuído é gerado a partir deste mesmo código:
 
@@ -146,10 +141,10 @@ e confere que nenhuma chave entrou no zip.
 ## Privacidade
 
 O `config.json` (na pasta do programa) guarda a chave local da sua lâmpada, o
-último endereço dela na rede e suas opções. Nada é instalado; o registro do
-Windows só é tocado se você ligar "Iniciar com o Windows". Ele **nunca** é versionado (está no `.gitignore`) e nunca sai da sua
-máquina. O programa só fala com a internet quando **você** pede para pegar a
-chave (conta Tuya ou portal); fora disso, toda a conversa é com a lâmpada,
+último endereço dela na rede e suas opções. Esse arquivo nunca vai para o
+repositório (está no `.gitignore`) e nunca sai da sua máquina. Nada é
+instalado, e o Windows só é alterado se você ligar "Iniciar com o Windows". O
+programa só fala com a internet quando você pede para pegar a chave (conta Tuya ou portal); fora disso, toda a conversa é com a lâmpada,
 dentro da sua rede.
 
 ---
@@ -157,7 +152,7 @@ dentro da sua rede.
 ## Como foi feito
 
 O LightWireless foi desenvolvido com apoio de inteligência artificial: o código foi feito em conversa
-com o **Claude**, da Anthropic (no Claude Code). As decisões de projeto, o desenho da interface, os
+com o Claude, da Anthropic (no Claude Code). As decisões de projeto, o desenho da interface, os
 testes com a lâmpada de verdade e o rumo de cada funcionalidade são de
 [finjackin](https://github.com/finjackin1).
 
@@ -165,7 +160,7 @@ testes com a lâmpada de verdade e o rumo de cada funcionalidade são de
 
 ## Licença
 
-GPLv3 — veja [LICENSE](LICENSE). Em resumo: use, estude, modifique e
+GPLv3, veja [LICENSE](LICENSE). Em resumo: use, estude, modifique e
 redistribua à vontade, desde que o resultado continue livre e com o
 código-fonte disponível. As licenças das bibliotecas usadas estão em
 [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt).
